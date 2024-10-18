@@ -1,3 +1,10 @@
+provider "google" {
+  credentials = file("gcp-account.json")
+  project     = "your-project-id"
+  region      = "us-central1"
+  zone        = "us-central-a"
+}
+
 resource "google_compute_instance" "data_example" {
   count        = 3
   name         = "data-example-instance-${count.index}"
@@ -11,6 +18,6 @@ resource "google_compute_instance" "data_example" {
 
   network_interface {
     network = "default"
-    # Remove access_config to avoid assigning external IP
+    access_config{}
   }
 }
